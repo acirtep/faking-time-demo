@@ -1,0 +1,70 @@
+version: '3.2'
+
+services:
+  faking_time_utc:
+    container_name: faking_time_utc
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+      - TZ=UTC
+    volumes:
+      - ./faking_time_demo:/app/faking_time_demo
+      - ./tests:/app/tests
+    command:
+      - bash
+      - -c
+      - tail -f /dev/null
+
+  faking_time_est:
+    container_name: faking_time_est
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+      - TZ=US/Eastern
+    volumes:
+      - ./faking_time_demo:/app/faking_time_demo
+      - ./tests:/app/tests
+    command:
+      - bash
+      - -c
+      - tail -f /dev/null
+
+  faking_time_nl:
+    container_name: faking_time_nl
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+      - TZ=Europe/Amsterdam
+    volumes:
+      - ./faking_time_demo:/app/faking_time_demo
+      - ./tests:/app/tests
+    command:
+      - bash
+      - -c
+      - tail -f /dev/null
+
+  faking_time_ro:
+    container_name: faking_time_ro
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+      - TZ=Europe/Bucharest
+    volumes:
+      - ./faking_time_demo:/app/faking_time_demo
+      - ./tests:/app/tests
+    command:
+      - bash
+      - -c
+      - tail -f /dev/null
